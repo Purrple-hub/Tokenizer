@@ -1,0 +1,83 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "anatok"
+version = "0.1.0"
+description = "Fast, memory-bounded AI text tokenization toolkit with compression, deduplication and Arrow (.pyarrow) results export."
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "anatok contributors" },
+]
+keywords = [
+    "tokenizer",
+    "tokenization",
+    "bpe",
+    "huggingface",
+    "nlp",
+    "compression",
+    "lz77",
+    "huffman",
+    "arrow",
+    "streaming",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: System :: Archiving :: Compression",
+]
+dependencies = [
+    "tokenizers>=0.15,<1.0",
+    "psutil>=5.9",
+    "pyarrow>=14.0",
+]
+
+[project.optional-dependencies]
+gui = [
+    "PyQt6>=6.6",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "ruff>=0.4",
+    "build>=1.2",
+]
+
+[project.scripts]
+anatok = "anatok.main:main"
+anatok-gui = "anatok.main:gui_main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/anatok"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/DOCKER",
+    "/LICENSE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E501"]

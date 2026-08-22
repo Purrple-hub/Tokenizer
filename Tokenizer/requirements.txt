@@ -1,0 +1,7 @@
+# Runtime dependencies (see pyproject.toml for authoritative, version-bounded pins)
+tokenizers
+psutil
+pyarrow
+
+# Optional GUI extra: pip install "anatok[gui]"
+PyQt6
